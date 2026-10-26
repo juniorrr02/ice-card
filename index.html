@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#d51f2a" />
+  <meta name="description" content="Know your constitutional rights: a printable, mobile-friendly rights card." />
+  <title>Know Your Constitutional Rights</title>
+  <style>
+    :root { color-scheme: light; --red: #d3212c; --white: #fff; --background: #596371; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100vh; margin: 0; padding: clamp(16px, 3vw, 32px);
+      font-family: Arial, Helvetica, sans-serif; color: var(--white);
+      background-color: var(--background);
+      background-image: url("background.svg");
+      background-position: center; background-size: 250px 250px;
+    }
+    main { max-width: 568px; margin: 0 auto; display: grid; gap: 20px; }
+    .card {
+      background: var(--red);
+      padding: 17px 20px 19px;
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 1px 3px rgba(0,0,0,.18);
+      font-size: 18px; line-height: 1.15;
+    }
+    .lead { margin: 0 0 10px; }
+    ul { margin: 0; padding-left: 11px; list-style: none; }
+    li { position: relative; margin: 0 0 10px; }
+    li:last-child { margin-bottom: 0; }
+    li::before { content: "•"; position: absolute; left: -11px; }
+    p { margin: 0 0 16px; }
+    p:last-child { margin-bottom: 0; }
+    strong { font-weight: 700; }
+    .note { margin-top: 12px; font-style: italic; text-align: center; }
+    @media (max-width: 480px) {
+      body { padding: 14px 12px; }
+      main { gap: 16px; }
+      .card { padding: 17px 16px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.27; }
+    }
+    @media print {
+      @page { size: letter; margin: 0.5in; }
+      body { background: white; padding: 0; }
+      main { max-width: 6in; gap: .2in; }
+      .card { background: #d3212c !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <main aria-label="Constitutional rights cards">
+    <section class="card" aria-labelledby="rights-title">
+      <p class="lead" id="rights-title">You have constitutional rights:</p>
+      <ul>
+        <li><strong>DO NOT OPEN THE DOOR</strong> if an immigration agent is knocking on the door.</li>
+        <li><strong>DO NOT ANSWER ANY QUESTIONS</strong> from an immigration agent if they try to talk to you. You have the right to remain silent.</li>
+        <li><strong>DO NOT SIGN ANYTHING</strong> without first speaking to a lawyer. You have the right to speak with a lawyer.</li>
+        <li>If you are outside of your home, ask the agent if you are free to leave and if they say yes, leave calmly.</li>
+        <li><strong>GIVE THIS CARD TO THE AGENT.</strong> If you are inside of your home, show the card through the window or slide it under the door.</li>
+      </ul>
+    </section>
+    <section class="card" aria-label="Statement to an immigration agent">
+      <p>I do not wish to speak with you, answer your questions, or sign or hand you any documents based on my 5th Amendment rights under the United States Constitution.</p>
+      <p>I do not give you permission to enter my home based on my 4th Amendment rights under the United States Constitution unless you have a warrant to enter, signed by a judge or magistrate with my name on it that you slide under the door.</p>
+      <p>I do not give you permission to search any of my belongings based on my 4th Amendment rights.</p>
+      <p>I choose to exercise my constitutional rights.</p>
+      <p class="note">These cards are available to citizens and noncitizens alike.</p>
+    </section>
+  </main>
+</body>
+</html>
