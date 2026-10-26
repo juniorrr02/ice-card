@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#d51f2a" />
-  <meta name="description" content="Know your constitutional rights: a printable, mobile-friendly rights card." />
-  <title>Know Your Constitutional Rights</title>
+  <meta name="description" content="Conozca sus derechos constitucionales: tarjeta informativa bilingüe." />
+  <title>Conozca sus derechos constitucionales</title>
   <style>
     :root { color-scheme: light; --red: #d3212c; --white: #fff; --background: #596371; }
     * { box-sizing: border-box; }
@@ -17,7 +17,16 @@
       background-image: url("background.svg");
       background-position: center; background-size: 250px 250px;
     }
+    .toolbar { display: flex; justify-content: flex-end; max-width: 568px; margin: 0 auto 14px; }
+    .language-toggle {
+      border: 1px solid rgba(255,255,255,.75); background: var(--red); color: #fff;
+      padding: 10px 17px; border-radius: 5px; font: 700 16px Arial, Helvetica, sans-serif;
+      cursor: pointer; min-height: 44px;
+    }
+    .language-toggle:hover { background: #b81825; }
+    .language-toggle:focus-visible { outline: 3px solid white; outline-offset: 3px; }
     main { max-width: 568px; margin: 0 auto; display: grid; gap: 20px; }
+    [hidden] { display: none !important; }
     .card {
       background: var(--red);
       padding: 17px 20px 19px;
@@ -37,20 +46,46 @@
     @media (max-width: 480px) {
       body { padding: 14px 12px; }
       main { gap: 16px; }
+      .toolbar { margin-bottom: 12px; }
       .card { padding: 17px 16px; font-size: clamp(15px, 4.2vw, 18px); line-height: 1.27; }
     }
     @media print {
       @page { size: letter; margin: 0.5in; }
       body { background: white; padding: 0; }
+      .toolbar { display: none; }
       main { max-width: 6in; gap: .2in; }
       .card { background: #d3212c !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; break-inside: avoid; }
     }
   </style>
 </head>
 <body>
-  <main aria-label="Constitutional rights cards">
-    <section class="card" aria-labelledby="rights-title">
-      <p class="lead" id="rights-title">You have constitutional rights:</p>
+  <header class="toolbar">
+    <button type="button" class="language-toggle" id="language-toggle" aria-label="Cambiar idioma a inglés">English</button>
+  </header>
+
+  <main id="spanish-cards" aria-label="Tarjetas de derechos constitucionales">
+    <section class="card" aria-labelledby="rights-title-es">
+      <p class="lead" id="rights-title-es">Usted tiene derechos constitucionales:</p>
+      <ul>
+        <li><strong>NO ABRA LA PUERTA</strong> si un agente de inmigración está tocando a su puerta.</li>
+        <li><strong>NO RESPONDA A NINGUNA PREGUNTA</strong> de un agente de inmigración si intenta hablar con usted. Tiene derecho a guardar silencio.</li>
+        <li><strong>NO FIRME NADA</strong> sin antes hablar con un abogado. Tiene derecho a hablar con un abogado.</li>
+        <li>Si está fuera de su casa, pregúntele al agente si puede irse y, si le dice que sí, retírese con calma.</li>
+        <li><strong>ENTREGUE ESTA TARJETA AL AGENTE.</strong> Si está dentro de su casa, muestre la tarjeta por la ventana o deslícela por debajo de la puerta.</li>
+      </ul>
+    </section>
+    <section class="card" aria-label="Declaración para un agente de inmigración">
+      <p>No deseo hablar con usted, responder a sus preguntas, ni firmar o entregarle ningún documento, amparándome en mis derechos de la Quinta Enmienda de la Constitución de los Estados Unidos.</p>
+      <p>No le doy permiso para entrar a mi casa, amparándome en mis derechos de la Cuarta Enmienda de la Constitución de los Estados Unidos, a menos que tenga una orden judicial de entrada firmada por un juez o magistrado, con mi nombre, y la deslice por debajo de la puerta.</p>
+      <p>No le doy permiso para registrar ninguna de mis pertenencias, amparándome en mis derechos de la Cuarta Enmienda.</p>
+      <p>Elijo ejercer mis derechos constitucionales.</p>
+      <p class="note">Estas tarjetas están disponibles tanto para ciudadanos como para no ciudadanos.</p>
+    </section>
+  </main>
+
+  <main id="english-cards" aria-label="Constitutional rights cards" hidden>
+    <section class="card" aria-labelledby="rights-title-en">
+      <p class="lead" id="rights-title-en">You have constitutional rights:</p>
       <ul>
         <li><strong>DO NOT OPEN THE DOOR</strong> if an immigration agent is knocking on the door.</li>
         <li><strong>DO NOT ANSWER ANY QUESTIONS</strong> from an immigration agent if they try to talk to you. You have the right to remain silent.</li>
@@ -67,5 +102,21 @@
       <p class="note">These cards are available to citizens and noncitizens alike.</p>
     </section>
   </main>
+
+  <script>
+    const toggle = document.getElementById('language-toggle');
+    const spanish = document.getElementById('spanish-cards');
+    const english = document.getElementById('english-cards');
+
+    toggle.addEventListener('click', () => {
+      const showEnglish = english.hidden;
+      english.hidden = !showEnglish;
+      spanish.hidden = showEnglish;
+      document.documentElement.lang = showEnglish ? 'en' : 'es';
+      document.title = showEnglish ? 'Know Your Constitutional Rights' : 'Conozca sus derechos constitucionales';
+      toggle.textContent = showEnglish ? 'Español' : 'English';
+      toggle.setAttribute('aria-label', showEnglish ? 'Switch language to Spanish' : 'Cambiar idioma a inglés');
+    });
+  </script>
 </body>
 </html>
